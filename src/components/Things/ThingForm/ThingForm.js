@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import AnimatedModal from '../../UI/Modal/Modal';
@@ -18,6 +18,8 @@ const initialState = {
 
 const formReducer = (currentForm, action) => {
     switch (action.type) {
+        case 'SET_ALL':
+            return { id: action.id, title: action.title, description: action.description }
         case 'SET_TITLE':
             return { ...currentForm, title: action.title };
         case 'SET_DESCRIPTION':
@@ -33,13 +35,24 @@ const formReducer = (currentForm, action) => {
 
 const ThingForm = (props) => {
     const classes = useStyle();
+    const [{ id, title, description, error }, dispatch] = useReducer(formReducer, initialState)
 
-    const [{ title, description, error }, dispatch] = useReducer(formReducer, initialState)
+    useEffect(() => {
+        if (props.selectedThing) {
+            console.log(props)
+            dispatch({
+                type: 'SET_ALL',
+                id: props.selectedThing.id,
+                title: props.selectedThing.title,
+                description: props.selectedThing.description
+            })
+        }
+    }, [props])
 
     const handleSubmit = e => {
         e.preventDefault();
         if (title !== '') {
-            props.addThing({title: title, description: description})
+            props.onSubmit({ id: id, title: title, description: description })
             onClose(false)
         } else {
             dispatch({ type: "BAD_INPUT" })
@@ -56,9 +69,9 @@ const ThingForm = (props) => {
             open={props.open}
             onClose={onClose}>
             <form noValidate autoComplete="off">
-                <TextField error={error} required label="Name" onChange={e => dispatch({ type: "SET_TITLE", title: e.target.value })} />
+                <TextField error={error} required value={title} label="Name" onChange={e => dispatch({ type: "SET_TITLE", title: e.target.value })} />
                 <br /><br />
-                <TextField multiline label="Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", description: e.target.value })} />
+                <TextField multiline label="Description" value={description} onChange={e => dispatch({ type: "SET_DESCRIPTION", description: e.target.value })} />
                 <br /><br />
                 <Button className={classes.submitButton} onClick={handleSubmit} color="primary">Save new Thing</Button>
             </form>

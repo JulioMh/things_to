@@ -29,7 +29,7 @@ const useStyle = makeStyles({
     }
 });
 
-const Thing = React.memo(({ thing, onDelete }) => {
+const Thing = React.memo(({ thing, onDelete, onEdit }) => {
     const classes = useStyle();
     return (
         <Card className={classes.card}>
@@ -48,7 +48,7 @@ const Thing = React.memo(({ thing, onDelete }) => {
                         <IconButton style={{ color: green[500] }}>
                             <CheckIcon />
                         </IconButton>
-                        <IconButton style={{ color: orange[500] }} >
+                        <IconButton style={{ color: orange[500] }} onClick={() => onEdit(thing)} >
                             <EditIcon />
                         </IconButton>
                     </Grid>

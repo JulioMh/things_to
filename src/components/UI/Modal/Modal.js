@@ -25,7 +25,7 @@ const AnimatedModal = (props) => {
             BackdropProps={{
                 timeout: 500,
             }}
-            onClose={() => props.onClose(false)}>
+            onClose={() => props.onClose()}>
             <Paper style={{ padding: 50 }}>
                 {props.children}
             </Paper>
