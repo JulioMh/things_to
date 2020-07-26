@@ -29,17 +29,16 @@ const useStyle = makeStyles({
     }
 });
 
-const Thing = React.memo(props => {
+const Thing = React.memo(({ thing, onDelete }) => {
     const classes = useStyle();
-
     return (
         <Card className={classes.card}>
             <CardContent>
-                <Typography className={classes.title}>{props.title}</Typography>
-                {props.description ?
+                <Typography className={classes.title}>{thing.title}</Typography>
+                {thing.description ?
                     <>
                         <Divider className={classes.divider} />
-                        <Typography variant="body2">{props.description}</Typography>
+                        <Typography variant="body2">{thing.description}</Typography>
                     </>
                     : null}
             </CardContent>
@@ -55,7 +54,7 @@ const Thing = React.memo(props => {
                     </Grid>
                     <Grid item xs={4} />
                     <Grid item xs={4}>
-                        <IconButton style={{ color: red[500] }} >
+                        <IconButton style={{ color: red[500] }} onClick={() => onDelete(thing.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </Grid>

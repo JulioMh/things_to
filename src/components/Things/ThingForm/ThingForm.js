@@ -39,7 +39,7 @@ const ThingForm = (props) => {
     const handleSubmit = e => {
         e.preventDefault();
         if (title !== '') {
-            props.addThing(title, description)
+            props.addThing({title: title, description: description})
             onClose(false)
         } else {
             dispatch({ type: "BAD_INPUT" })
@@ -57,9 +57,9 @@ const ThingForm = (props) => {
             onClose={onClose}>
             <form noValidate autoComplete="off">
                 <TextField error={error} required label="Name" onChange={e => dispatch({ type: "SET_TITLE", title: e.target.value })} />
-                <br />
-                <TextField label="Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", description: e.target.value })} />
-                <br />
+                <br /><br />
+                <TextField multiline label="Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", description: e.target.value })} />
+                <br /><br />
                 <Button className={classes.submitButton} onClick={handleSubmit} color="primary">Save new Thing</Button>
             </form>
         </AnimatedModal>

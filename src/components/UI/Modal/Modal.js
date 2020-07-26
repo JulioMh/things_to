@@ -19,14 +19,14 @@ const AnimatedModal = (props) => {
     return (
         <Modal
             className={classes.modal}
-            open={props.open}
+            open={props.open ? props.open : false}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{
                 timeout: 500,
             }}
             onClose={() => props.onClose(false)}>
-            <Paper style={{padding:50}}>
+            <Paper style={{ padding: 50 }}>
                 {props.children}
             </Paper>
         </Modal>

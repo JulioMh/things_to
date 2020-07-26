@@ -1,11 +1,11 @@
 import React from 'react';
 import Thing from './Thing/Thing';
 
-const ThingList = React.memo(
-    props =>
+const ThingList = React.memo(props => {
+    return (
         <>
-            {props.things.map(({ title, description }) => <Thing title={title} description={description} />)}
-        </>
-);
+            {props.things.map((thing) => <Thing key={thing.id} thing={thing} onDelete={props.onDelete} />)}
+        </>)
+});
 
 export default ThingList;
