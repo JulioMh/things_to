@@ -1,5 +1,6 @@
 import React from 'react';
 import Things from './containers/Things/Things';
+import ThingsProvider from "./contexts/ThingsContext/ThingsContext"
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles({
@@ -12,9 +13,11 @@ const App = () => {
   const classes = useStyle();
 
   return (
-    <div className={classes.root}>
-      <Things />
-    </div>
+    <ThingsProvider>
+      <div className={classes.root}>
+        <Things />
+      </div>
+    </ThingsProvider>
   );
 }
 

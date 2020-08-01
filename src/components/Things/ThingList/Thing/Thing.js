@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThingsContext } from '../../../../contexts/ThingsContext/ThingsContext'
+import { FormContext } from '../../../../contexts/FormContext/FormContext'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -29,8 +31,11 @@ const useStyle = makeStyles({
     }
 });
 
-const Thing = React.memo(({ thing, onDelete, onEdit }) => {
+const Thing = React.memo(({ thing }) => {
     const classes = useStyle();
+    const { CRUD } = useContext(ThingsContext);
+    const { handleToEdit } = useContext(FormContext);
+
     return (
         <Card className={classes.card}>
             <CardContent>
@@ -48,13 +53,13 @@ const Thing = React.memo(({ thing, onDelete, onEdit }) => {
                         <IconButton style={{ color: green[500] }}>
                             <CheckIcon />
                         </IconButton>
-                        <IconButton style={{ color: orange[500] }} onClick={() => onEdit(thing)} >
+                        <IconButton style={{ color: orange[500] }} onClick={() => handleToEdit(thing)} >
                             <EditIcon />
                         </IconButton>
                     </Grid>
                     <Grid item xs={4} />
                     <Grid item xs={4}>
-                        <IconButton style={{ color: red[500] }} onClick={() => onDelete(thing.id)}>
+                        <IconButton style={{ color: red[500] }} onClick={() => CRUD.deleteThing(thing.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </Grid>
