@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { formReducer, initialState } from "../../reducers/formReducer/formReducer";
+import { formReducer, initialState } from "../../../reducers/formReducer/formReducer";
 
 const defaultState = {
     formState: {}
