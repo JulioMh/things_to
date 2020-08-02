@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from "react";
-import { thingsReducer } from "../../../reducers/thingsReducer/thingsReducer";
-import useFetch from "../../../hooks/useFetch/useFetch";
+import { thingsReducer } from "../../reducers/thingsReducer/thingsReducer";
+import useFetch from "../../hooks/useFetch/useFetch";
 import Swal from "sweetalert2";
 
 const defaultState = {

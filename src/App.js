@@ -1,6 +1,6 @@
 import React from 'react';
-import Things from './with_ContextAPI/containers/Things/Things';
-import ThingsProvider from "./with_ContextAPI/contexts/ThingsContext/ThingsContext"
+import Things from './containers/Things/Things';
+import ThingsProvider from "./contexts/ThingsContext/ThingsContext"
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyle = makeStyles({
